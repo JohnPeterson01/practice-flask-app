@@ -2,7 +2,7 @@ from flask.blueprints import Blueprint
 from flask import request, Response
 import json
 
-from stores.user_store import UserStore
+from dependencies import Stores
 
 
 user_blueprint = Blueprint('user_blueprint', __name__)
@@ -19,6 +19,7 @@ def hi_there(name):
         headers=headers
     )
 
+
 @user_blueprint.route('/new', methods=['POST'])
 def add_user():
     request_body = json.loads(request.data)
@@ -26,7 +27,7 @@ def add_user():
     # Validate the request here...
 
     # request body validated
-    user_store = UserStore()
+    user_store = Stores.user_store()
     user_store.create(request_body)
     
     response_data = ''
@@ -41,8 +42,9 @@ def add_user():
 
 @user_blueprint.route('/all', methods=['GET'])
 def fetch_all_users():
-    user_store = UserStore()
+    user_store = Stores.user_store()
     users = user_store.search_all()
+    
     results = []
     for user in users:
         user_obj = {
