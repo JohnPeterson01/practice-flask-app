@@ -8,7 +8,7 @@ from stores.user_store import UserStore
 user_blueprint = Blueprint('user_blueprint', __name__)
 
 
-@user_blueprint.route('/<name>')
+@user_blueprint.route('/<name>', methods=['GET'])
 def hi_there(name):
     response_data = json.dumps({ "name": name })
     status_code = 200
@@ -38,6 +38,24 @@ def add_user():
         headers=headers
     )
 
-@user_blueprint.route('/all')
+
+@user_blueprint.route('/all', methods=['GET'])
 def fetch_all_users():
-    return
+    user_store = UserStore()
+    users = user_store.search_all()
+    results = []
+    for user in users:
+        user_obj = {
+            "name": user.name,
+            "email": user.email
+        }
+        results.append(user_obj)
+
+    response_data = json.dumps({"results": results })
+    status_code = 200
+    headers = {"Content-Type": "application/json"}
+    return Response(
+        response=response_data,
+        status=status_code,
+        headers=headers
+    )

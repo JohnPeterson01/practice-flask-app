@@ -10,6 +10,35 @@ The purpose of this project is also to learn about several design patterns inclu
 - singletons
 - adapters
 
-To do still:
+### Project commands:
+Activate virtual environment
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+Deactivate
+```
+deactivate
+```
+
+Install Requirements
+```
+pip install requirements.txt
+```
+
+Run app:
+```
+python app.py
+```
+
+DB:
+```
+python manage.py db init (only needed if starting project from scratch)
+python manage.py db migrate
+python manage.py db upgrade
+```
+
+#### To do still:
 - dependency injection using pinject (https://github.com/google/pinject)
 - dependency injection using dependency-injector (https://python-dependency-injector.ets-labs.org/)
