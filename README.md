@@ -38,7 +38,3 @@ python manage.py db init (only needed if starting project from scratch)
 python manage.py db migrate
 python manage.py db upgrade
 ```
-
-#### To do still:
-- dependency injection using pinject (https://github.com/google/pinject)
-- dependency injection using dependency-injector (https://python-dependency-injector.ets-labs.org/)
