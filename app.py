@@ -3,4 +3,4 @@ from flask import Flask
 
 class MainApplication:
     def __init__(self):
-        self.app = Flask(__name__)
+        self.app = Flask('my-app')

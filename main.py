@@ -3,8 +3,7 @@ import os
 
 from dependencies import MainApp, \
     MainDatabase, \
-    RouteRegistries, \
-    UserRoutes
+    RouteRegistries
 
 from factories.config import ConfigFactory
 
@@ -15,8 +14,7 @@ def create_app():
 
 
 def setup_routes():
-    RouteRegistries.routes_registry()
-    UserRoutes.user_routes()
+    RouteRegistries.user_routes_registry()
 
 
 def setup_config(app_obj):

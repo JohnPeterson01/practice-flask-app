@@ -3,7 +3,6 @@ from .base import BaseCRUDStore
 from models.user_model import UserModel
 
 
-# Dependency on the db and on the
 class UserStore(BaseCRUDStore):
     def __init__(self, database):
         self.model = UserModel
@@ -16,7 +15,7 @@ class UserStore(BaseCRUDStore):
         return
 
     def search_all(self):
-        users = self.db.session.query(UserModel)
+        users = self.db.session.query(self.model)
         return users
 
 

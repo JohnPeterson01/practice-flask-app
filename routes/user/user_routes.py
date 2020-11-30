@@ -3,14 +3,22 @@ import json
 
 
 class UserRoutes:
-    def __init__(self, user_store, user_blueprint):
+    def __init__(self, user_store):
         self.user_store = user_store
-        self.user_blueprint = user_blueprint
-        self._register()
 
-    def _register(self):
+    def register(self, blueprint):
+        @blueprint.route('', methods=['GET'])
+        def hi():
+            response_data = ''
+            status_code = 200
+            headers = {"Content-Type": "application/json"}
+            return Response(
+                response=response_data,
+                status=status_code,
+                headers=headers
+            )
 
-        @self.user_blueprint.route('/new', methods=['POST'])
+        @blueprint.route('/new', methods=['POST'])
         def add_user():
             request_body = json.loads(request.data)
 
@@ -29,8 +37,9 @@ class UserRoutes:
                 headers=headers
             )
 
-        @self.user_blueprint.route('/all', methods = ['GET'])
+        @blueprint.route('/all', methods=['GET'])
         def fetch_all_users():
+            print(self)
             users = self.user_store.search_all()
 
             results = []
@@ -49,3 +58,5 @@ class UserRoutes:
                 status=status_code,
                 headers=headers
             )
+
+        return blueprint

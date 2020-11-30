@@ -1,22 +1,24 @@
-# from routes.user_routes import user_blueprint
-
-# Convert to registry class
-# def register(app_obj):
-#     app = app_obj.app
-#     app.register_blueprint(user_blueprint, url_prefix="/api/v1/user")
-
-# from routes.user.user_routes import UserRoutes
+from flask.blueprints import Blueprint
 
 
-class RoutesRegistry:
-    def __init__(self, application, user_blueprint, user_routes, user_store):
+class RoutesRegistry(Blueprint):
+    def __init__(self, blueprint_name, application, routes, url_prefix):
+        super().__init__(blueprint_name, __name__)
+
         self.app = application.app
-        # User route specific
-        self.user_blueprint = user_blueprint
-        self.user_routes = user_routes
-        self.user_store = user_store
+        self.routes = routes
+        self.url_prefix = url_prefix
+
         self._register_routes()
+        self._register_blueprint()
 
     def _register_routes(self):
-        self.app.register_blueprint(self.user_blueprint, url_prefix="/api/v1/user")
-        
+        self.routes.register(self)
+
+    def _register_blueprint(self):
+        self.app.register_blueprint(self, url_prefix=self.url_prefix)
+
+
+
+
+
