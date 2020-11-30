@@ -1,23 +1,21 @@
 import os
-from dotenv import load_dotenv
 
 
 class Config:
     def __init__(self):
-        self._load_from_env_file()
         self.DEBUG = False
         self.TESTING = False
         self.CSRF_ENABLED = True
         self.SECRET_KEY = 'this-really-needs-to-be-changed'
 
-    def _load_from_env_file(self):
-        load_dotenv()
+        self.SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+        self.REDIS_HOSTNAME = os.environ['REDIS_HOSTNAME']
+        self.REDIS_PORT = os.environ['REDIS_PORT']
 
 
 class DevelopmentConfig(Config):
     def __init__(self):
         super().__init__()
-        self.SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
         self.SQLALCHEMY_TRACK_MODIFICATIONS = False
         self.DEVELOPMENT = True
         self.DEBUG = True

@@ -27,14 +27,21 @@ Install Requirements
 pip install requirements.txt
 ```
 
-Run app:
+Run app
 ```
-python app.py
+python main.py
 ```
 
-DB:
+Redis
+```
+docker run -d --rm -p 6379:6379 --name flask-redis redis
+docker stop flask-redis
+```
+
+DB
 ```
 python manage.py db init (only needed if starting project from scratch)
 python manage.py db migrate
 python manage.py db upgrade
 ```
+

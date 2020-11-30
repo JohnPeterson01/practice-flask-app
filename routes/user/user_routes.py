@@ -40,17 +40,9 @@ class UserRoutes:
         @blueprint.route('/all', methods=['GET'])
         def fetch_all_users():
             print(self)
-            users = self.user_store.search_all()
+            db_result = self.user_store.search_all()
 
-            results = []
-            for user in users:
-                user_obj = {
-                    "name": user.name,
-                    "email": user.email
-                }
-                results.append(user_obj)
-
-            response_data = json.dumps({"results": results})
+            response_data = json.dumps({"results": db_result})
             status_code = 200
             headers = {"Content-Type": "application/json"}
             return Response(

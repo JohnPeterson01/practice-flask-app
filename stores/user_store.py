@@ -1,12 +1,14 @@
-from .base import BaseCRUDStore
+import json
 
+from .base import BaseCRUDStore
 from models.user_model import UserModel
 
 
 class UserStore(BaseCRUDStore):
-    def __init__(self, database):
+    def __init__(self, database, cache):
         self.model = UserModel
         self.db = database.db
+        self.cache = cache
 
     def create(self, creation_dict):
         model_obj = self.model(**creation_dict)
@@ -14,8 +16,36 @@ class UserStore(BaseCRUDStore):
         self.db.session.commit()
         return
 
+    # TODO: Implement cache as a decorator
     def search_all(self):
-        users = self.db.session.query(self.model)
-        return users
+        cache_operation = 'searchall'
+        cache_result = self.cache.get(cache_operation)
+
+        if cache_result is None:
+            users = self.db.session.query(self.model)
+            users_arr = self._parse_db_results(users)
+            self.cache.set(cache_operation, json.dumps(users_arr))
+            return users_arr
+        else:
+            users_arr = self._parse_cache_result(cache_result)
+            return users_arr
+
+    # TODO: Implement filter by user_id
+
+    def _parse_db_results(self, raw_results):
+        results_arr = []
+        # Make this less manual
+        for user in raw_results:
+            user_obj = {
+                "name": user.name,
+                "email": user.email
+            }
+            results_arr.append(user_obj)
+        return results_arr
+
+    def _parse_cache_result(self, raw_result):
+        return json.loads(raw_result.decode())
+
+
 
 

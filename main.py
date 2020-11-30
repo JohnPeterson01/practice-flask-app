@@ -1,11 +1,7 @@
-from dotenv import load_dotenv
-import os
-
 from dependencies import MainApp, \
     MainDatabase, \
-    RouteRegistries
-
-from factories.config import ConfigFactory
+    RouteRegistries, \
+    Config
 
 
 def create_app():
@@ -18,10 +14,8 @@ def setup_routes():
 
 
 def setup_config(app_obj):
-    load_dotenv()
-    environment = os.environ['ENVIRONMENT']
-    config = ConfigFactory.create(environment)
-    app_obj.app.config.from_object(config)
+    config_obj = Config.config_factory()
+    app_obj.app.config.from_object(config_obj.config)
 
 
 def setup_database():
