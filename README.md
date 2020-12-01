@@ -53,7 +53,7 @@ nosetests -s
 ```
 
 Debugging
-Place the following snippet inside the code block
+- Place the following snippet inside the code block
 ```python
 import pdb; 
 pdb.set_trace() 
