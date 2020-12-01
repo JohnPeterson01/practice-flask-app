@@ -29,7 +29,3 @@ def setup_config(app_obj):
 
 def setup_database():
     MainDatabase.database()
-
-
-# if __name__ == '__main__':
-#     create_app()
