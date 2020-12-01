@@ -1,14 +1,8 @@
-# from src.dependencies import MainApp, \
-#     MainDatabase, \
-#     RouteRegistries, \
-#     Config
+from src.dependencies import MainApp, \
+    MainDatabase, \
+    RouteRegistries, \
+    Config
 
-from src.dependencies import MainApp, MainDatabase, RouteRegistries, Config
-
-
-# def create_app():
-#     app = MainApp.application()
-#     return app
 
 def create_app():
     app_obj = MainApp.application()
