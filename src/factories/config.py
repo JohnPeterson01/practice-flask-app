@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 import os
 
-from config import DevelopmentConfig, TestConfig
-from factories.base import BaseCreator
+from src.config import DevelopmentConfig, TestConfig
+from src.factories.base import BaseCreator
 
 
 # Creates a config object

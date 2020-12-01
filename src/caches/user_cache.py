@@ -1,6 +1,3 @@
-from caches.base import BaseCache
-
-
 class UserCache:
     def __init__(self, base_cache):
         self.cache = base_cache

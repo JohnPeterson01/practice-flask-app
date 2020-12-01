@@ -1,7 +1,7 @@
 import json
 
 from .base import BaseCRUDStore
-from models.user_model import UserModel
+from src.models.user_model import UserModel
 
 
 class UserStore(BaseCRUDStore):

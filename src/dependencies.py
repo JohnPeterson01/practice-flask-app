@@ -1,14 +1,14 @@
 from dependency_injector import providers, containers
 
-from app import MainApplication
-from database import DatabaseStore
-from routes.registry import RoutesRegistry
-from caches.base import BaseCache
-from factories.config import ConfigFactory
+from src.app import MainApplication
+from src.database import DatabaseStore
+from src.routes.registry import RoutesRegistry
+from src.caches.base import BaseCache
+from src.factories.config import ConfigFactory
 
-from stores.user_store import UserStore
-from routes.user.user_routes import UserRoutes
-from caches.user_cache import UserCache
+from src.stores.user_store import UserStore
+from src.routes.user.user_routes import UserRoutes
+from src.caches.user_cache import UserCache
 
 
 class MainApp(containers.DeclarativeContainer):

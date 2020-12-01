@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from factories.base import BaseCreator
+from src.factories.base import BaseCreator
 
 
 class DatabaseSessionFactory(BaseCreator):
