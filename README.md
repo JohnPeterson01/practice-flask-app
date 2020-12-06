@@ -35,8 +35,12 @@ docker run -d --rm -p 6379:6379 --name flask-redis redis
 docker stop flask-redis
 ```
 
-DB - make sure postgres is running
+DB - make sure postgres is running (docker or local)
+```python
+
 ```
+
+```python
 python manage.py db init (only needed if starting project from scratch)
 python manage.py db migrate
 python manage.py db upgrade

@@ -1,25 +1,45 @@
+import os
+from dotenv import load_dotenv
+
 from src.dependencies import MainApp, \
     MainDatabase, \
     RouteRegistries, \
     Config
+from src.session import configure_session_factory
 
 
-def create_app():
-    app_obj = MainApp.application()
-    setup_config(app_obj)
-    setup_database()
+def create_app(testing=False):
+    load_dotenv()
+
+    app = MainApp.application().app
+    setup_config(app)
+    setup_database(testing)
     setup_routes()
-    app_obj.app.run()
+
+    app_name = get_app_name()
+    # Test the configure session factory piece
+    configure_session_factory(app, app_name, testing)
+    app.run()
+
+
+def get_app_name():
+    # os.environ['APP_NAME']
+    return 'user-service'
 
 
 def setup_routes():
     RouteRegistries.user_routes_registry()
 
 
-def setup_config(app_obj):
+def setup_config(app):
     config_obj = Config.config_factory()
-    app_obj.app.config.from_object(config_obj.config)
+    app.config.from_object(config_obj.config)
 
 
-def setup_database():
-    MainDatabase.database()
+def setup_database(testing):
+    MainDatabase.database(testing=testing)
+
+
+# TODO: move into separate file
+def runserver():
+    create_app()

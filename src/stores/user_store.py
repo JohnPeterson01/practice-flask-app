@@ -1,6 +1,6 @@
 import json
 
-from .base import BaseCRUDStore
+from src.stores.base import BaseCRUDStore
 from src.models.user_model import UserModel
 
 
@@ -18,6 +18,7 @@ class UserStore(BaseCRUDStore):
 
     # TODO: Implement cache as a decorator
     def search_all(self):
+
         cache_operation = 'searchall'
         cache_result = self.cache.get(cache_operation)
 
@@ -32,6 +33,7 @@ class UserStore(BaseCRUDStore):
 
     # TODO: Implement filter by user_id
 
+    # TODO: Move this to parent class
     def _parse_db_results(self, raw_results):
         results_arr = []
         # Make this less manual
@@ -43,6 +45,7 @@ class UserStore(BaseCRUDStore):
             results_arr.append(user_obj)
         return results_arr
 
+    # TODO: Move to cache class
     def _parse_cache_result(self, raw_result):
         return json.loads(raw_result.decode())
 

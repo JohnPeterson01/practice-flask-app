@@ -39,7 +39,6 @@ class UserRoutes:
 
         @blueprint.route('/all', methods=['GET'])
         def fetch_all_users():
-            print(self)
             db_result = self.user_store.search_all()
 
             response_data = json.dumps({"results": db_result})

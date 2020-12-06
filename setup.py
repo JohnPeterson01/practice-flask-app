@@ -31,7 +31,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'runserver = src.main:create_app',
+            'runserver = src.main:runserver',
         ],
     },
 )

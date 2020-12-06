@@ -1,11 +1,15 @@
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from src.database import create_engine
 
 from src.factories.base import BaseCreator
 
 
-class DatabaseSessionFactory(BaseCreator):
-    def create():
-        engine = create_engine("postgresql://root:root@localhost:5432/random", echo=True)
-        session = sessionmaker(bind=engine)
-        return session
+class SessionMakerFactory(BaseCreator):
+    def __init__(self, app_name, testing):
+        self.app_name = app_name
+        self.testing = testing
+
+    def create(self):
+        engine = create_engine(self.app_name, self.testing)
+        return sessionmaker(bind=engine)
+

@@ -1,5 +1,5 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 from src.config import DevelopmentConfig, TestConfig
 from src.factories.base import BaseCreator

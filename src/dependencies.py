@@ -5,6 +5,7 @@ from src.database import DatabaseStore
 from src.routes.registry import RoutesRegistry
 from src.caches.base import BaseCache
 from src.factories.config import ConfigFactory
+from src.factories.session import SessionMakerFactory
 
 from src.stores.user_store import UserStore
 from src.routes.user.user_routes import UserRoutes
@@ -17,6 +18,10 @@ class MainApp(containers.DeclarativeContainer):
 
 class Config(containers.DeclarativeContainer):
     config_factory = providers.Singleton(ConfigFactory)
+
+
+class Session(containers.DeclarativeContainer):
+    session_factory = providers.Singleton(SessionMakerFactory)
 
 
 class MainDatabase(containers.DeclarativeContainer):
