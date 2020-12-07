@@ -1,8 +1,8 @@
-from src.models.base import Base
+from src.models.base import ModelBase
 from sqlalchemy import Column, Integer, String
 
 
-class UserModel(Base):
+class UserModel(ModelBase):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)

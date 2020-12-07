@@ -6,23 +6,25 @@ from src.dependencies import MainApp, \
     RouteRegistries, \
     Config
 from src.session import configure_session_factory
+from src.setup.create_all import main as createall_main
+from src.setup.drop_all import main as drop_all_main
 
 
-def create_app(testing=False):
-    load_dotenv()
-
+def create_app(testing=False, run_app=True):
     app = MainApp.application().app
     setup_config(app)
-    setup_database(testing)
+    # setup_database(testing)
     setup_routes()
 
     app_name = get_app_name()
     # Test the configure session factory piece
     configure_session_factory(app, app_name, testing)
-    app.run()
-
+    if run_app:
+        app.run()
+    return app
 
 def get_app_name():
+    load_dotenv()
     # os.environ['APP_NAME']
     return 'user-service'
 
@@ -43,3 +45,18 @@ def setup_database(testing):
 # TODO: move into separate file
 def runserver():
     create_app()
+
+
+def createall():
+    testing = False
+    create_app(testing, run_app=False)
+    app_name = get_app_name()
+    createall_main(app_name, testing)
+
+
+def dropall():
+    testing = False
+    create_app(testing, run_app=False)
+    app_name = get_app_name()
+    drop_all_main(app_name, testing)
+    

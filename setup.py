@@ -32,6 +32,8 @@ setup(
     entry_points={
         'console_scripts': [
             'runserver = src.main:runserver',
+            'create-all = src.main:createall',
+            'drop-all = src.main:dropall'
         ],
     },
 )

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine as create_sqlalchemy_engine
 
 
 class DatabaseStore:
-    def __init__(self, application, testing):
+    def __init__(self, application, testing=False):
         app = application.app
         self.db = SQLAlchemy(app)
 
@@ -22,4 +22,9 @@ def select_database_name(app_name, testing):
 
 def create_engine(app_name, testing):
     database_name = select_database_name(app_name, testing)
-    return create_sqlalchemy_engine(f'postgresql://user:user@localhost:5432/{database_name}')
+    username = 'user-service-user'
+    password = 'user-service-user'
+    host = 'localhost'
+    port = '5432'
+
+    return create_sqlalchemy_engine(f'postgresql://{username}:{password}@{host}:{port}/{database_name}')

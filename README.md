@@ -37,10 +37,22 @@ docker stop flask-redis
 
 DB - make sure postgres is running (docker or local)
 ```python
-
+createuser user-service-user
+createdb -O user-service-user user_service
+createdb -O user-service-user user_service_test
 ```
 
+Create all (-D used to drop before creating)
 ```python
+create-all [-D]
+```
+
+Drop all tables
+```python
+drop-all
+```
+
+```python - not working
 python manage.py db init (only needed if starting project from scratch)
 python manage.py db migrate
 python manage.py db upgrade

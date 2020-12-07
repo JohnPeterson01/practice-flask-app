@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 
 
-
-
 class BaseCRUDStore(ABC):
 
     @abstractmethod
@@ -11,5 +9,6 @@ class BaseCRUDStore(ABC):
 
     @property
     def session(self):
+        # Dynamic import done to prevent circular import issues
         from src.context import SessionContext
         return SessionContext.session
