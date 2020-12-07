@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 
 from src.dependencies import MainApp, \
-    MainDatabase, \
     RouteRegistries, \
     Config
 from src.session import configure_session_factory
@@ -13,7 +12,6 @@ from src.setup.drop_all import main as drop_all_main
 def create_app(testing=False, run_app=True):
     app = MainApp.application().app
     setup_config(app)
-    # setup_database(testing)
     setup_routes()
 
     app_name = get_app_name()
@@ -25,8 +23,7 @@ def create_app(testing=False, run_app=True):
 
 def get_app_name():
     load_dotenv()
-    # os.environ['APP_NAME']
-    return 'user-service'
+    return os.environ['APP_NAME']
 
 
 def setup_routes():
@@ -36,10 +33,6 @@ def setup_routes():
 def setup_config(app):
     config_obj = Config.config_factory()
     app.config.from_object(config_obj.config)
-
-
-def setup_database(testing):
-    MainDatabase.database(testing=testing)
 
 
 # TODO: move into separate file

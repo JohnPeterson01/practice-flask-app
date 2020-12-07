@@ -1,11 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine as create_sqlalchemy_engine
-
-
-class DatabaseStore:
-    def __init__(self, application, testing=False):
-        app = application.app
-        self.db = SQLAlchemy(app)
 
 
 def convert_dashes_to_underscores(old_name):

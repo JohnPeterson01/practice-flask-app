@@ -1,7 +1,7 @@
 from dependency_injector import providers, containers
 
 from src.app import MainApplication
-from src.database import DatabaseStore
+# from src.database import DatabaseStore
 from src.routes.registry import RoutesRegistry
 from src.caches.base import BaseCache
 from src.factories.config import ConfigFactory
@@ -24,10 +24,6 @@ class Session(containers.DeclarativeContainer):
     session_factory = providers.Singleton(SessionMakerFactory)
 
 
-class MainDatabase(containers.DeclarativeContainer):
-    database = providers.Singleton(DatabaseStore, application=MainApp.application)
-
-
 class Caches(containers.DeclarativeContainer):
     redis = providers.Singleton(BaseCache, config=Config.config_factory().config)
     user_cache = providers.Singleton(UserCache, base_cache=redis)
@@ -35,7 +31,6 @@ class Caches(containers.DeclarativeContainer):
 
 class Stores(containers.DeclarativeContainer):
     user_store = providers.Singleton(UserStore,
-                                     database=MainDatabase.database,
                                      cache=Caches.user_cache())
 
 
