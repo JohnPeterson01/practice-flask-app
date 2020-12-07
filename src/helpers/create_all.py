@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from src.setup.operations import create_all, drop_all
+from src.helpers.operations import create_all, drop_all
 
 
 # Taken from microcosm_postgres

@@ -5,8 +5,8 @@ from src.dependencies import MainApp, \
     RouteRegistries, \
     Config
 from src.session import configure_session_factory
-from src.setup.create_all import main as createall_main
-from src.setup.drop_all import main as drop_all_main
+from src.helpers.create_all import main as createall_main
+from src.helpers.drop_all import main as drop_all_main
 
 
 def create_app(testing=False, run_app=True):

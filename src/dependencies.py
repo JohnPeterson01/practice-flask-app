@@ -1,7 +1,6 @@
 from dependency_injector import providers, containers
 
 from src.app import MainApplication
-# from src.database import DatabaseStore
 from src.routes.registry import RoutesRegistry
 from src.caches.base import BaseCache
 from src.factories.config import ConfigFactory
