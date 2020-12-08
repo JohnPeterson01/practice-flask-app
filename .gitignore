@@ -1,3 +1,6 @@
 __pycache__/
 venv/
 .idea/
+.eggs/
+example_pkg_jp_flask1.egg-info/
+.coverage
