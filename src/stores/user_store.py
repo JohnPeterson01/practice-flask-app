@@ -8,6 +8,11 @@ class UserStore(BaseCRUDStore):
     def __init__(self, cache):
         self.model = UserModel
         self.cache = cache
+        self.filter_fields = {
+                "id": UserModel.id,
+                "name": UserModel.name,
+                "email": UserModel.email
+        }
 
     def create(self, creation_dict):
         model_obj = self.model(**creation_dict)
@@ -15,7 +20,6 @@ class UserStore(BaseCRUDStore):
         self.session.commit()
         return
 
-    # TODO: Implement cache as a decorator
     def search_all(self):
 
         cache_operation = 'searchall'
@@ -27,26 +31,33 @@ class UserStore(BaseCRUDStore):
             self.cache.set(cache_operation, json.dumps(users_arr))
             return users_arr
         else:
-            users_arr = self._parse_cache_result(cache_result)
+            users_arr = json.loads(cache_result)
             return users_arr
 
-    # TODO: Implement filter by user_id
+    def filter(self, **filter_dict):
+        query_obj = self.session.query(self.model)
+
+        for key, value in filter_dict.items():
+            model_field = self.filter_fields[key]
+            query_obj = query_obj.filter(model_field == value)
+        
+        # Need to automatically create filter's from a filter dict
+        users_arr = self._parse_db_results(query_obj)
+
+        return users_arr
+
 
     # TODO: Move this to parent class
-    def _parse_db_results(self, raw_results):
+    def _parse_db_results(self, query):
         results_arr = []
         # Make this less manual
-        for user in raw_results:
+        for user in query:
             user_obj = {
                 "name": user.name,
                 "email": user.email
             }
             results_arr.append(user_obj)
         return results_arr
-
-    # TODO: Move to cache class
-    def _parse_cache_result(self, raw_result):
-        return json.loads(raw_result.decode())
 
 
 

@@ -12,3 +12,4 @@ class BaseCRUDStore(ABC):
         # Dynamic import done to prevent circular import issues
         from src.context import SessionContext
         return SessionContext.session
+    

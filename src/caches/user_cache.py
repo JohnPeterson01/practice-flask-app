@@ -18,6 +18,7 @@ class UserCache:
         return self.cache.delete(qualified_key)
 
     def _make_qualified_key(self, operation_name, *args):
-        # TODO: when doing filtering, would need to create tuple of args to add to the redis key)
-        # Tuple args example: (1,10,3)
-        return f'{self.KEY_PREFIX}:${operation_name}'
+        args_tuple = ''
+        if len(args) > 0:
+            args_tuple = f':{args}'
+        return f'{self.KEY_PREFIX}:{operation_name}{args_tuple}'

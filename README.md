@@ -74,3 +74,8 @@ Debugging
 import pdb; 
 pdb.set_trace() 
 ```
+
+Multi line statement in python debugger (hit Ctrl-D to go back to debugger)
+```python
+!import code; code.interact(local=vars())
+```

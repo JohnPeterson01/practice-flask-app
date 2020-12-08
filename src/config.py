@@ -18,7 +18,6 @@ class DevelopmentConfig(Config):
         super().__init__()
         self.SQLALCHEMY_TRACK_MODIFICATIONS = False
         self.DEVELOPMENT = True
-        self.DEBUG = True
 
 
 class TestConfig(Config):
